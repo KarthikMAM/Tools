@@ -7,23 +7,39 @@ namespace CodeConverters
     {
         static void Main(string[] args)
         {
-            FileStream inputFile = new FileStream("karthik.txt", FileMode.OpenOrCreate, FileAccess.Read);
-            FileStream outputFile = new FileStream("output.txt", FileMode.OpenOrCreate, FileAccess.Write);
-            StreamReader reader = new StreamReader(inputFile);
-            StreamWriter writer = new StreamWriter(outputFile);
-            string data;
-            while((data = reader.ReadLine()) != null)
+            string sourceFile, destinationFile;
+
+            Console.Write("\n\n\tENTER THE SOURCE : ");
+            sourceFile = Console.ReadLine();
+            Console.Write("\n\n\tENTER THE TARGET (DIFFERENT FROM SOURCE) : ");
+            destinationFile = Console.ReadLine();
+
+            try
             {
-                while(Char.IsDigit(data[0]) || data[0] == ' ' || data[0] == '.')
+                FileStream inputFile = new FileStream(sourceFile, FileMode.OpenOrCreate, FileAccess.Read);
+                FileStream outputFile = new FileStream(destinationFile, FileMode.OpenOrCreate, FileAccess.Write);
+                StreamReader reader = new StreamReader(inputFile);
+                StreamWriter writer = new StreamWriter(outputFile);
+                string data;
+                while ((data = reader.ReadLine()) != null)
                 {
-                    data = data.Remove(0,1);
+                    while (Char.IsDigit(data[0]) || data[0] == ' ' || data[0] == '.')
+                    {
+                        data = data.Remove(0, 1);
+                    }
+                    writer.WriteLine(data);
                 }
-                writer.WriteLine(data);
+                writer.Close();
+                reader.Close();
+                inputFile.Close();
+                outputFile.Close();
+
+                Console.WriteLine("\n\n\tTHE FILE HAS BEEN SUCCESSFULLY CONVERTED AND SAVED IN {0}", Path.GetFileName(destinationFile));
             }
-            writer.Close();
-            reader.Close();
-            inputFile.Close();
-            outputFile.Close();
+            catch(IOException e)
+            {
+                Console.WriteLine("\n\n\t EXCEPTION : " + e.Message);
+            }
         }
     }
 }
