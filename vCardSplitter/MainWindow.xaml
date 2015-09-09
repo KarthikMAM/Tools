@@ -1,0 +1,16 @@
+﻿<Window x:Class="vCardSplitter.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="vCard Splitter" Height="110" Width="225" WindowState="Normal" ResizeMode="NoResize">
+    <Grid>
+        <Button Name="Select"
+                Content="Select and Split" 
+                HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                Margin="10" Height="30"
+                Click="Button_Click"/>
+        <Label Content="© Kappspot" 
+               HorizontalAlignment="Right" VerticalAlignment="Bottom" HorizontalContentAlignment="Right"
+               Margin="0,0,4.4,1.6" 
+               Width="100" Height="27"/>
+    </Grid>
+</Window>
